@@ -2,12 +2,10 @@
 #include <netinet/in.h>
 #include <arpa/inet.h>  
 #include <unistd.h> 
-#include<stdio.h>  
-#include<stdlib.h>  
-#include<string.h>
+#include"httpResponse.h"
 
 #define BUFFER_SIZE 4096
-#define PORT 9000
+#define PORT 9090
 
 int main(){
 
@@ -53,13 +51,17 @@ int main(){
             continue; 
         }
 
-
-        
         memset(buffer,0,BUFFER_SIZE-1);
         read(client_fd,buffer,BUFFER_SIZE);
-        printf("%s",buffer);
+        printf("Client Request:");
+        printf("\n%s\n",buffer);
 
+        char * response = (char*)malloc(sizeof(char)*BUFFER_SIZE);
+        size_t response_length;
+        char* file_name = "hello.html";
 
+        http_response(file_name,response,&response_length);
+        write(client_fd,response,response_length);
 
         close(client_fd);
     }
