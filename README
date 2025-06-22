@@ -1,0 +1,2 @@
+This is a simple HTTP response server implemented in C. I did this to learn more about HTTP requests and 
+how sockets work. This is NOT a full fledge HTTP server like Apache,Nginx etc. 
